@@ -20,8 +20,6 @@
         <%! int dia = Calendar.getInstance().get(Calendar.DAY_OF_MONTH); %>
         <%! int mes = Calendar.getInstance().get(Calendar.MONTH) + 1; %>
         <%! int year = Calendar.getInstance().get(Calendar.YEAR);%>
-
-        <!-- Configuramos el "evento" para cuando hagamos submit -->
     <section class="p-5">
 
         <div class="container form text-white p-5">

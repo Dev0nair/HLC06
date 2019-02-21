@@ -15,7 +15,7 @@
     <body>
         <!-- Cogemos las variables -->
         <%
-            String nombreu = "", apellidou = "", fechau = "", edad = "";
+            String nombreu = "", apellidou = "", fechau = "";
             Calendar fechaFinal = Calendar.getInstance();
 
             if (request.getParameter("nombre") != null) {
@@ -27,10 +27,7 @@
             if (request.getParameter("fechan") != null) {
                 fechau = request.getParameter("fechan");
                 // year month date
-                fechaFinal.set(Integer.parseInt(fechau.substring(0, 3)), Integer.parseInt(fechau.substring(5, 6)), Integer.parseInt(fechau.substring(8, 9)));
-                
-                // calculamos edad. 86400000 = milisegundos en un dia, y nos dará los días. posteriormente dividimos por los días que tenga un año
-                edad = "";
+                fechaFinal.set(Integer.parseInt(fechau.substring(0, 4)), Integer.parseInt(fechau.substring(5, 7)), Integer.parseInt(fechau.substring(8, 10)));                
             } 
 
         %>
@@ -40,11 +37,15 @@
         <jsp:setProperty name="user" property="fechaNac" value="<%= fechaFinal%>" />
         
         <!-- ahora definimos las diferentes variables para la fecha, edad... -->
-        
+        <%
+            String edad = user.getEdad() + "";
+            String horos = user.getSigno();
+        %>
         <ul>
             <li>Nombre: <jsp:getProperty name="user" property="nombre" /> <jsp:getProperty name="user" property="apellido" /></li>
             <li>Fecha nacimiento: <%= fechau %></li>
             <li>Edad: <%= edad %></li>
+            <li>Horoscopo: <%= horos %></li>
         </ul>
         
     </body>

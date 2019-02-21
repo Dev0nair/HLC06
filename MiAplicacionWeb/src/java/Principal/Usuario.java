@@ -39,15 +39,19 @@ public class Usuario {
         return fechaNac;
     }
     
-    public int getEdad(){
-        return (fechaNac.get(Calendar.DAY_OF_YEAR)) + (fechaNac.get(Calendar.YEAR) - 1 * 365); // lo que llevamos de año mas los anteriores      
+    public int getEdad(){ // contamos que los meses tienen 30 dias, lo cual los años 360. de esta forma conseguimos una mejor precisión
+        Calendar actual = Calendar.getInstance();
+        int dias_actual = ( (actual.get(Calendar.YEAR) - 1) * 360) + (actual.get(Calendar.MONTH) * 30) + (actual.get(Calendar.DAY_OF_MONTH)); // cogemos los días pasados en total
+        int dias_user = ( (fechaNac.get(Calendar.YEAR) - 1) * 360) + (actual.get(Calendar.MONTH) * 30) + (fechaNac.get(Calendar.DAY_OF_MONTH)); // cogemos los días totales en su fecha de nacimiento
+        
+        return (dias_actual - dias_user) / 360; // devolvemos la diferencia entre 365
     }
     
     public String getSigno(){
-        String[]lista = new String [] { "Acuario", "piscis", "aries", "tauro", "géminis",
-                                        "cancer", "leo", "virgo", "libra", "escorpio",
-                                        "sagitario", "capricornio" };
-        return lista[fechaNac.get(Calendar.MONTH)];
+        String[]lista = new String [] { "Acuario", "Piscis", "Aries", "Tauro", "Géminis",
+                                        "Cancer", "Leo", "Virgo", "Libra", "Escorpio",
+                                        "Sagitario", "Capricornio" };
+        return lista[fechaNac.get(Calendar.MONTH) - 1];
     }
 
     public void setFechaNac(Calendar fechaNac) {
